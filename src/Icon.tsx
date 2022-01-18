@@ -1,7 +1,10 @@
 import type { ComponentViewProps } from './Element';
-import { View } from './Element';
+import { View } from './View';
+import { ImageBackground } from './Image';
 import type { IconProp } from './types/svg';
 import { useThemeContext } from './provider/ThemeProvider';
+import { ImageProps } from './Image';
+
 interface IconProps {
   name: IconProp | string;
   color?: string;
@@ -9,7 +12,7 @@ interface IconProps {
 }
 
 const IconList = {};
-export const SVGIcon = ({
+export const Icon = ({
   name,
   size = 20,
   color = 'black',
@@ -30,3 +33,12 @@ export const SVGIcon = ({
     </View>
   );
 };
+
+export const IconImage = ({
+  size,
+  source,
+  style = {},
+  ...rest
+}: ImageProps) => (
+  <ImageBackground size={size} style={style} src={source} {...rest} />
+);

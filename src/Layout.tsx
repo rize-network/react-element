@@ -1,4 +1,4 @@
-import { View } from './Element';
+import { View } from './View';
 
 export const Layout = (props: any) => <View {...props} />;
 
@@ -29,12 +29,7 @@ export const Center = (props: any) => (
 );
 
 export const AlignStart = (props: any) => (
-  <View
-    display={'flex'}
-    justifyContent="flex-start"
-    width={'100%'}
-    {...props}
-  />
+  <View display={'flex'} justifyContent="flex-start" {...props} />
 );
 
 export const AlignCenter = (props: any) => (
@@ -45,6 +40,9 @@ export const AlignEnd = (props: any) => (
   <View display={'flex'} justifyContent="flex-end" width={'100%'} {...props} />
 );
 
-export const Bottom = (props: any) => (
+export const Start = (props: any) => (
+  <View display={'flex'} alignSelf="flex-end" {...props} />
+);
+export const End = (props: any) => (
   <View display={'flex'} alignSelf="flex-end" {...props} />
 );

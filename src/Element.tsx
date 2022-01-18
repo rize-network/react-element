@@ -1,10 +1,7 @@
-import { PureComponent } from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
 import type {
   GenericStyleProp,
-  ImageProps,
-  ImageStyle,
   TextProps,
   TextStyle,
   ViewProps,
@@ -316,10 +313,6 @@ export interface ComponentViewProps
   backgroundColor?: string;
 }
 
-export interface ComponentImageBackgroundProps extends ComponentViewProps {
-  src: string;
-}
-
 export interface ComponentTextProps
   extends Omit<TextProps, 'pointerEvents' | 'onPress'>,
     CSSProperties {
@@ -338,20 +331,6 @@ export interface ComponentTextProps
 
   onPress?: void;
   action?: string;
-}
-
-export interface ComponentImageProps
-  extends Omit<ImageProps, 'pointerEvents' | 'source'>,
-    CSSProperties {
-  size?: number;
-  className?: string;
-
-  backgroundColor?: string;
-  onPress?: void;
-  action?: string;
-  alt?: string;
-  src: string | any;
-  style?: GenericStyleProp<ImageStyle>;
 }
 
 export const setSize = (newSize: string | number, newProps: any) => {
@@ -546,54 +525,10 @@ export const onlyStyle = (props: any) => {
   return newProps;
 };
 
-export const ViewComponent = styled.div((props: any) => {
+export const ViewElement = styled.div((props: any) => {
   return onlyStyle(props);
 });
 
-export const ImageComponent = styled.img((props: CSSProperties) => {
+export const ImageElement = styled.img((props: CSSProperties) => {
   return onlyStyle(props);
 });
-
-export const View = (props: ComponentViewProps) => {
-  const newStyle = applyStyle(props);
-  let onClick;
-  if (props.onPress !== undefined) {
-    onClick = props.onPress;
-  }
-
-  return <ViewComponent {...props} onClick={onClick} {...newStyle} />;
-};
-
-export const ImageElement = (props: ComponentImageProps) => {
-  const newStyle = applyStyle(props);
-  let onClick;
-  if (props.onPress !== undefined) {
-    onClick = props.onPress;
-  }
-
-  return <ImageComponent {...props} onClick={onClick} {...newStyle} />;
-};
-
-export class ImageBackground extends PureComponent<
-  ComponentImageBackgroundProps
-> {
-  render() {
-    const { src, style, ...props } = this.props;
-
-    return (
-      <View
-        style={{
-          ...style,
-          backgroundSize: 'contain',
-          backgroundImage: `url("${src}")`,
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-        }}
-        {...props}
-      />
-    );
-  }
-}
-
-export const SafeAreaView = View;
-export const ScrollView = View;
