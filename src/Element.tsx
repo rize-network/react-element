@@ -1,5 +1,4 @@
 import { PureComponent } from 'react';
-import { convert, responsive } from 'src/utils/responsive';
 import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
 import type {
@@ -356,6 +355,7 @@ export interface ComponentImageProps
 }
 
 export const setSize = (newSize: string | number, newProps: any) => {
+  const { convert, responsive } = useResponsiveContext();
   if (
     typeof newSize === 'string' &&
     newSize.length > 0 &&
@@ -379,6 +379,7 @@ export const setSize = (newSize: string | number, newProps: any) => {
 
 export const applyStyle = (props: any) => {
   const { getColor } = useThemeContext();
+  const { convert, responsive } = useResponsiveContext();
 
   const newProps: any = {};
 
@@ -469,7 +470,7 @@ export const applyStyle = (props: any) => {
             property !== 'flex' &&
             property !== 'fontWeight'
           ) {
-            newProps[property] = `${parseInt(convert[propertyType](value))}px`;
+            newProps[property] = convert[propertyType](value) + 'px';
           } else {
             newProps[property] = value;
           }

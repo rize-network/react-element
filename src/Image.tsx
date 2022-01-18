@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import type { ComponentImageProps } from 'src';
-import { ImageBackground, Text } from 'src';
+import React from 'react';
+import { ImageBackground, ImageElement } from 'src/Element';
 import { CSSProperties } from 'styled-components';
 
 export interface ImageProps extends React.ReactElement {
@@ -16,59 +15,9 @@ export interface IconProps extends React.ReactElement {
   color?: string;
 }
 
-export class Image extends Component<ComponentImageProps> {
-  static defaultProps = {
-    cloudName: ' ',
-    options: {
-      crop: 'fill',
-      format: 'jpg',
-      quality: 100,
-      secure: true,
-      cdn_subdomain: true,
-    },
-    style: {},
-    sideMargin: 0,
-    width: 100,
-    height: 100,
-    borderRadius: 0,
-  };
-
-  state = {
-    error: false,
-    loaded: false,
-  };
-
-  loaded() {
-    this.setState({ loaded: true });
-  }
-  error() {
-    this.setState({ error: true });
-  }
-  render() {
-    const { error } = this.state;
-    const { style, source } = this.props;
-
-    const { width, height, borderRadius } = this.props;
-
-    if (error) {
-      return (
-        <Text color="white" fontSize={18}>
-          {'Error while loading image'}
-        </Text>
-      );
-    }
-
-    return (
-      <ImageBackground
-        style={style}
-        height={height}
-        width={width}
-        borderRadius={borderRadius}
-        src={source}
-      />
-    );
-  }
-}
+export const Image = ({ source, ...rest }: ImageProps) => (
+  <ImageElement src={source} {...rest} />
+);
 
 export const ImageIcon = ({
   height,
@@ -77,23 +26,23 @@ export const ImageIcon = ({
   style = {},
   ...rest
 }: ImageProps) => (
-  <Image width={width} height={height} style={style} src={source} {...rest} />
-);
-
-export const Icon = ({ size, src, style = {}, ...rest }: ImageProps) => (
-  <Image width={size} height={size} style={style} src={src} {...rest} />
-);
-
-export const RoundedImage = ({ size, source, ...props }: any) => (
   <Image
-    borderRadius={size / 2}
-    width={size}
-    height={size}
+    width={width}
+    height={height}
+    style={style}
     source={source}
-    {...props}
+    {...rest}
   />
 );
 
+export const Icon = ({ size, source, style = {}, ...rest }: ImageProps) => (
+  <ImageBackground size={size} style={style} src={source} {...rest} />
+);
+
+export const RoundedImage = ({ size, source, ...props }: any) => (
+  <Image borderRadius={size / 2} size={size} source={source} {...props} />
+);
+
 export const SquaredImage = ({ size, source, ...props }: any) => (
-  <Image {...props} width={size} height={size} src={source} />
+  <Image {...props} size={size} source={source} />
 );

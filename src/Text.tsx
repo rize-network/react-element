@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import type { ComponentTextProps } from './Element';
 import { applyStyle, onlyStyle } from './Element';
 import { useThemeContext } from './provider/ThemeProvider';
-import { useResponsiveContext } from './provider/useScreenSize';
+import { useResponsiveContext } from './provider/ResponsiveProvider';
 
 export const formatTextStyle = ({
   hint = false,
@@ -35,13 +35,15 @@ export const formatTextStyle = ({
   return props;
 };
 
-export const TextSpan: React.FC = styled.div((props: CSSProperties) => {
-  props.display = 'inherit';
-  props.flexDirection = 'column';
-  return onlyStyle(props);
-});
+export const TextSpan: React.FC<CSSProperties> = styled.div(
+  (props: CSSProperties) => {
+    props.display = 'inherit';
+    props.flexDirection = 'column';
+    return onlyStyle(props);
+  },
+);
 
-export const TextComponent: React.FC = (textProps: ComponentTextProps) => {
+export const TextComponent: React.FC<ComponentTextProps> = (textProps) => {
   const { getColor } = useThemeContext();
 
   const styledProps = applyStyle(textProps);
@@ -91,4 +93,4 @@ export const TextComponent: React.FC = (textProps: ComponentTextProps) => {
   );
 };
 
-export const Text: React.FC = TextComponent;
+export const Text: React.FC<ComponentTextProps> = TextComponent;

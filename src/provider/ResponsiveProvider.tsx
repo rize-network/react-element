@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { useMount } from '@app-studio/react-hook';
 import { enquireScreen } from 'enquire-js';
-import _ from 'lodash';
 
 export type RatioScreenConfig = {
   width: number;
@@ -41,15 +40,15 @@ const defaultScalingRatioConfig: RatioConfig = {
 
 export type ScreenResponsiveConfig = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ScreenResponsiveFunction = {
-  width: (value: number) => void;
-  height: (value: number) => void;
-  fontSize: (value: number) => void;
+  width: (value: number) => string;
+  height: (value: number) => string;
+  fontSize: (value: number) => string;
 };
 
 export type ScreenConvertFunction = {
-  width: (value: number) => void;
-  height: (value: number) => void;
-  fontSize: (value: number) => void;
+  width: (value: number) => number;
+  height: (value: number) => number;
+  fontSize: (value: number) => number;
 };
 
 export type ScreenResponsiveValue = {
@@ -190,6 +189,7 @@ const ResponsiveProvider = ({
         orientation,
         responsive,
         convert,
+        scalingRatio,
       }}
     >
       {children}

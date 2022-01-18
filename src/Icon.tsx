@@ -1,4 +1,3 @@
-import React from 'react';
 import type { ComponentViewProps } from 'src/Element';
 import { View } from 'src/Element';
 import type { IconProp } from 'src/types/svg';
