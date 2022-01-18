@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/react-hook",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React Hook",
   "main": "./dist/index.js",
   "repository": "git@github.com:rize-network/react-hook.git",
