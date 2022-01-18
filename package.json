@@ -76,5 +76,11 @@
       "eslint --cache --fix",
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@app-studio/react-hook": "^0.0.2",
+    "contrast": "^1.0.1",
+    "enquire-js": "^0.2.1",
+    "styled-components": "^5.3.3"
   }
 }
