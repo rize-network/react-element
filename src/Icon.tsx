@@ -1,7 +1,7 @@
-import type { ComponentViewProps } from 'src/Element';
-import { View } from 'src/Element';
-import type { IconProp } from 'src/types/svg';
-import { useThemeContext } from 'src/provider/ThemeProvider';
+import type { ComponentViewProps } from './Element';
+import { View } from './Element';
+import type { IconProp } from './types/svg';
+import { useThemeContext } from './provider/ThemeProvider';
 interface IconProps {
   name: IconProp | string;
   color?: string;

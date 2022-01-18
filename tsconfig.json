@@ -8,10 +8,7 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "baseUrl": ".",
-    "paths": {
-      "src/*": ["./src/*"],
-    },
+  
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
@@ -19,9 +16,7 @@
     "lib": ["dom", "es2017"],
     "outDir": "dist"
   },
-  "include": [
-    "src/**/*"
-  ],
+ 
   "exclude": [
     "node_modules",
     "build",

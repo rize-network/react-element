@@ -1,4 +1,4 @@
-import { View } from 'src/Element';
+import { View } from './Element';
 
 export const Layout = (props: any) => <View {...props} />;
 

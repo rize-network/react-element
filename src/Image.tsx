@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, ImageElement } from 'src/Element';
+import { ImageBackground, ImageElement } from './Element';
 import { CSSProperties } from 'styled-components';
 
 export interface ImageProps extends React.ReactElement {

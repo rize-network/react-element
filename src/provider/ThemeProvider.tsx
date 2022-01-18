@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { colors } from 'src/theme/colors';
+import { colors } from '../theme/colors';
 
 type ColorConfig = Record<string, Record<string, string> | string>;
 
