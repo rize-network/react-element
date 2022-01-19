@@ -1,10 +1,30 @@
 import React from 'react';
 import type { CSSProperties } from 'react';
 import styled from 'styled-components';
-import type { ComponentTextProps } from './Element';
 import { applyStyle, onlyStyle } from './Element';
 import { useThemeContext } from './provider/ThemeProvider';
 import { useResponsiveContext } from './provider/ResponsiveProvider';
+import type { GenericStyleProp, TextProps, TextStyle } from './types/types';
+
+export interface ComponentTextProps
+  extends Omit<TextProps, 'pointerEvents' | 'onPress'>,
+    CSSProperties {
+  data?: object;
+  children?: string | any;
+  className?: string;
+  paddingHorizontal?: number | string;
+  marginHorizontal?: number | string;
+  paddingVertical?: number | string;
+  marginVertical?: number | string;
+  locale?: string;
+  toUpperCase?: boolean;
+  style?: GenericStyleProp<TextStyle>;
+
+  backgroundColor?: string;
+
+  onPress?: void;
+  action?: string;
+}
 
 export const formatTextStyle = ({
   hint = false,

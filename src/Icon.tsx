@@ -1,4 +1,4 @@
-import type { ComponentViewProps } from './Element';
+import type { ComponentViewProps } from './View';
 import { View } from './View';
 import { ImageBackground } from './Image';
 import type { IconProp } from './types/svg';

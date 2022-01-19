@@ -1,5 +1,23 @@
 import { ViewElement, applyStyle } from './Element';
-import type { ComponentViewProps } from './Element';
+import type { GenericStyleProp, ViewProps, ViewStyle } from './types/types';
+import type { CSSProperties } from 'react';
+
+export interface ComponentViewProps
+  extends Omit<ViewProps, 'pointerEvents' | 'onPress'>,
+    CSSProperties {
+  size?: number;
+  className?: string;
+  loading?: boolean;
+  style?: GenericStyleProp<ViewStyle>;
+  paddingHorizontal?: number | string;
+  marginHorizontal?: number | string;
+  paddingVertical?: number | string;
+  marginVertical?: number | string;
+
+  onPress?: () => void;
+  action?: string;
+  backgroundColor?: string;
+}
 
 export const View = (props: ComponentViewProps) => {
   const newStyle = applyStyle(props);

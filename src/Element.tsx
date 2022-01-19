@@ -1,12 +1,5 @@
-import type { CSSProperties } from 'styled-components';
+import type { CSSProperties } from 'react';
 import styled from 'styled-components';
-import type {
-  GenericStyleProp,
-  TextProps,
-  TextStyle,
-  ViewProps,
-  ViewStyle,
-} from './types/types';
 import { useResponsiveContext } from './provider/ResponsiveProvider';
 import { useThemeContext } from './provider/ThemeProvider';
 
@@ -295,43 +288,6 @@ export const StyleProps: any = {};
 allStyleProps.map((property) => {
   StyleProps[property] = true;
 });
-
-export interface ComponentViewProps
-  extends Omit<ViewProps, 'pointerEvents' | 'onPress'>,
-    CSSProperties {
-  size?: number;
-  className?: string;
-  loading?: boolean;
-  style?: GenericStyleProp<ViewStyle>;
-  paddingHorizontal?: number | string;
-  marginHorizontal?: number | string;
-  paddingVertical?: number | string;
-  marginVertical?: number | string;
-
-  onPress?: () => void;
-  action?: string;
-  backgroundColor?: string;
-}
-
-export interface ComponentTextProps
-  extends Omit<TextProps, 'pointerEvents' | 'onPress'>,
-    CSSProperties {
-  data?: object;
-  children?: string | any;
-  className?: string;
-  paddingHorizontal?: number | string;
-  marginHorizontal?: number | string;
-  paddingVertical?: number | string;
-  marginVertical?: number | string;
-  locale?: string;
-  toUpperCase?: boolean;
-  style?: GenericStyleProp<TextStyle>;
-
-  backgroundColor?: string;
-
-  onPress?: void;
-  action?: string;
-}
 
 export const setSize = (newSize: string | number, newProps: any) => {
   const { convert, responsive } = useResponsiveContext();

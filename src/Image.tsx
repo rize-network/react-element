@@ -3,7 +3,7 @@ import { CSSProperties } from 'styled-components';
 import { applyStyle, ImageElement } from './Element';
 import { View } from './View';
 
-import type { ComponentViewProps } from './Element';
+import type { ComponentViewProps } from './View';
 import type { GenericStyleProp, ImageStyle } from './types/types';
 
 export interface ComponentImageProps
@@ -29,11 +29,6 @@ export interface ImageProps extends React.ReactElement {
   width?: number;
   height?: number;
   source: string;
-}
-export interface IconProps extends React.ReactElement {
-  size?: number;
-  source: string;
-  color?: string;
 }
 
 export class ImageBackground extends PureComponent<
