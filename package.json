@@ -2,7 +2,6 @@
   "name": "@app-studio/react-element",
   "version": "0.0.2",
   "description": "React Hook",
-  "main": "./dist/index.js",
   "repository": "git@github.com:rize-network/react-hook.git",
   "author": "Steedmonteiro <steed@rize.network>",
   "license": "MIT",
@@ -53,10 +52,9 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "build": "tsc",
     "validate": "tsc --project tsconfig.json --noEmit",
     "prepare": "husky install",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./dist && rimraf ./esm",
     "lint": "npm run eslint && npm run prettier",
     "lint:fix": "npm run eslint:fix && npm run prettier:fix",
     "lint-staged": "lint-staged",
@@ -65,9 +63,21 @@
     "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=codeframe ./src",
     "prettier:fix": "prettier --write ./src",
     "prettier": "prettier --check ./src",
+    "build:cjs": "tsc",
+    "build:es": "tsc -m esNext --outDir esm",
+    "build": "npm run clean && npm run build:cjs && npm run build:es",
     "prepublishOnly": "npm run clean && npm run build",
     "upgrade": "ncu -u"
   },
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "sideEffects": false,
+  "files": [
+    "lib/",
+    "esm/"
+  ],
+  "types": "lib/index.d.ts",
+  "typings": "lib/index.d.ts",
   "lint-staged": {
     "./src/**/*.{md,json}": [
       "prettier --write"

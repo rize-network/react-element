@@ -9,12 +9,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "declaration": true,
+
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,
     "lib": ["dom", "es2017"],
-    "outDir": "dist"
+    "outDir": "dist",
   },
  
   "exclude": [
