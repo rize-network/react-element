@@ -1,5 +1,5 @@
 import React from 'react';
-import type { CSSProperties } from 'react';
+import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
 import { applyStyle, onlyStyle } from './Element';
 import { useThemeContext } from './provider/ThemeProvider';
@@ -26,10 +26,11 @@ export interface ComponentTextProps
   action?: string;
 }
 
-export const formatTextStyle = ({
+export const formatTextStyle: any = ({
   hint = false,
   disabled = false,
   opacity,
+  fontSize,
   ...props
 }: CSSProperties & {
   disabled: number | boolean;
@@ -40,7 +41,10 @@ export const formatTextStyle = ({
   const { convert } = useResponsiveContext();
 
   if (props) {
-    const fontSize = convert.fontSize(props.fontSize);
+    if (fontSize) {
+      fontSize = convert.fontSize(fontSize);
+    }
+
     if (hint) {
       opacity = hint as number;
     }
@@ -60,7 +64,7 @@ export const TextSpan: React.FC<CSSProperties> = styled.div(
     props.display = 'inherit';
     props.flexDirection = 'column';
     return onlyStyle(props);
-  },
+  }
 );
 
 export const TextComponent: React.FC<ComponentTextProps> = (textProps) => {

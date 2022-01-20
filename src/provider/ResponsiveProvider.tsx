@@ -1,3 +1,4 @@
+import React from 'react';
 import { createContext, useContext, useState } from 'react';
 import { useMount } from '@app-studio/react-hook';
 import { enquireScreen } from 'enquire-js';
@@ -51,11 +52,11 @@ export type ScreenConvertFunction = {
   fontSize: (value: number) => number;
 };
 
-export type ScreenResponsiveValue = {
+export type ScreenSizeRange = {
   min: number;
   max: number;
 };
-type ResponsiveConfig = Record<ScreenResponsiveConfig, ScreenResponsiveValue>;
+type ResponsiveConfig = Record<ScreenResponsiveConfig, ScreenSizeRange>;
 const defaultResponsiveConfig: ResponsiveConfig = {
   xs: {
     min: -Infinity,
@@ -86,7 +87,7 @@ const responsive = {
 };
 
 const defaultScreenKeysConfig = Object.keys(
-  defaultResponsiveConfig,
+  defaultResponsiveConfig
 ) as ScreenResponsiveConfig[];
 
 export type ScreenConfig = {
@@ -120,9 +121,8 @@ const defaultScreenConfig: ScreenConfig = {
   },
 };
 
-export const ResponsiveContext = createContext<ScreenConfig>(
-  defaultScreenConfig,
-);
+export const ResponsiveContext =
+  createContext<ScreenConfig>(defaultScreenConfig);
 
 export const useResponsiveContext = () => useContext(ResponsiveContext);
 
@@ -137,7 +137,7 @@ const ResponsiveProvider = ({
 }) => {
   const [screen, setScreen] = useState(defaultScreenConfig.screen);
   const [orientation, setOrientation] = useState(
-    defaultScreenConfig.orientation,
+    defaultScreenConfig.orientation
   );
 
   const responsiveConfig: ResponsiveConfig = config
@@ -166,7 +166,9 @@ const ResponsiveProvider = ({
 
   useMount(() => {
     for (const key of Object.keys(responsiveConfig)) {
-      const sizeScreen = responsiveConfig[key];
+      const sizeScreen: ScreenSizeRange = responsiveConfig[
+        key as ScreenResponsiveConfig
+      ] as ScreenSizeRange;
       enquireScreen(() => {
         setScreen(key as ScreenResponsiveConfig);
       }, `only screen ${sizeScreen.min && sizeScreen.min >= 0 ? 'and (min-width:' + sizeScreen.min + 'px)' : ''} ${sizeScreen.max && sizeScreen.max >= 0 && sizeScreen.max < Infinity ? 'and (max-width:' + sizeScreen.max + 'px)' : ''}`);
@@ -189,7 +191,7 @@ const ResponsiveProvider = ({
         orientation,
         responsive,
         convert,
-        scalingRatio,
+        scalingRatio: ratioConfig,
       }}
     >
       {children}

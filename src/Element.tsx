@@ -222,7 +222,7 @@ export const BaseStyleProperty: any = {};
 LayoutStyleProps.concat(ShadowStyleProps, TransformStyleProps).map(
   (property) => {
     BaseStyleProperty[property] = true;
-  },
+  }
 );
 
 export const ViewStyleProperty: any = BaseStyleProperty;
@@ -251,7 +251,7 @@ export const allStyleProps: string[] = LayoutStyleProps.concat(
   ViewStyleProps,
   ScrollViewStyleProps,
   TextStyleProps,
-  ImageStyleProps,
+  ImageStyleProps
 );
 
 const WidthWords = ['X', 'Width', 'Horizontal', 'Right', 'Left'];
@@ -259,7 +259,7 @@ const WidthWords = ['X', 'Width', 'Horizontal', 'Right', 'Left'];
 export const WidthStyleProperty = ['x', 'width', 'right', 'left'].concat(
   allStyleProps.filter((property) => {
     return WidthWords.some((item) => property.indexOf(item) >= 0);
-  }),
+  })
 );
 export const WidthStyleProps: any = {};
 WidthStyleProperty.map((property) => {
@@ -271,7 +271,7 @@ const HeightWords = ['Y', 'Height', 'Vertical', 'top', 'bottom'];
 export const HeightStyleProperty = ['y', 'height', 'top', 'bottom'].concat(
   allStyleProps.filter((property) => {
     return HeightWords.some((item) => property.indexOf(item) >= 0);
-  }),
+  })
 );
 
 export const HeightStyleProps: any = {};
@@ -297,7 +297,7 @@ export const setSize = (newSize: string | number, newProps: any) => {
     newSize[newSize.length - 1] === 'w'
   ) {
     newProps.height = newProps.width = responsive.width(
-      parseInt(newSize.replace('w', '')),
+      parseInt(newSize.replace('w', ''))
     );
   } else if (
     typeof newSize === 'string' &&
@@ -305,7 +305,7 @@ export const setSize = (newSize: string | number, newProps: any) => {
     newSize[newSize.length - 1] === 'h'
   ) {
     newProps.height = newProps.width = responsive.width(
-      parseInt(newSize.replace('h', '')),
+      parseInt(newSize.replace('h', ''))
     );
   } else if (typeof newSize === 'number') {
     newProps.height = newProps.width = convert.width(newSize);
@@ -390,7 +390,7 @@ export const applyStyle = (props: any) => {
             value[value.length - 1] === 'w'
           ) {
             newProps[property] = responsive.width(
-              parseInt(value.replace('w', '')),
+              parseInt(value.replace('w', ''))
             );
           } else if (
             typeof value === 'string' &&
@@ -398,7 +398,7 @@ export const applyStyle = (props: any) => {
             value[value.length - 1] === 'h'
           ) {
             newProps[property] = responsive.height(
-              parseInt(value.replace('h', '')),
+              parseInt(value.replace('h', ''))
             );
           } else if (
             typeof value === 'number' &&
@@ -430,7 +430,7 @@ function convertToCSS(props: any) {
   return Object.entries(props).reduce((str, [key, val]) => {
     const casedKey = key.replace(
       /[A-Z]/g,
-      (match) => `-${match.toLowerCase()}`,
+      (match) => `-${match.toLowerCase()}`
     );
     return `${str}${casedKey}:${val};`;
   }, '');

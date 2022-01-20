@@ -1,17 +1,25 @@
+import React from 'react';
 import type { ComponentViewProps } from './View';
 import { View } from './View';
 import { ImageBackground } from './Image';
 import type { IconProp } from './types/svg';
 import { useThemeContext } from './provider/ThemeProvider';
-import { ImageProps } from './Image';
+import { CSSProperties } from 'styled-components';
 
+export interface ImageIconProps extends React.ReactElement {
+  style?: CSSProperties & any;
+  size?: number;
+  width?: number;
+  height?: number;
+  source: string;
+}
 interface IconProps {
   name: IconProp | string;
   color?: string;
   size?: number;
 }
 
-const IconList = {};
+const IconList: any = {};
 export const Icon = ({
   name,
   size = 20,
@@ -39,6 +47,6 @@ export const IconImage = ({
   source,
   style = {},
   ...rest
-}: ImageProps) => (
+}: IconProps & ImageIconProps) => (
   <ImageBackground size={size} style={style} src={source} {...rest} />
 );

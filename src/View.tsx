@@ -1,3 +1,4 @@
+import React from 'react';
 import { ViewElement, applyStyle } from './Element';
 import type { GenericStyleProp, ViewProps, ViewStyle } from './types/types';
 import type { CSSProperties } from 'react';

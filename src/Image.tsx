@@ -4,7 +4,7 @@ import { applyStyle, ImageElement } from './Element';
 import { View } from './View';
 
 import type { ComponentViewProps } from './View';
-import type { GenericStyleProp, ImageStyle } from './types/types';
+import type { GenericStyleProp, ImageStyle, ImageProps } from './types/types';
 
 export interface ComponentImageProps
   extends Omit<ImageProps, 'pointerEvents' | 'source'>,
@@ -23,17 +23,8 @@ export interface ComponentImageProps
 export interface ComponentImageBackgroundProps extends ComponentViewProps {
   src: string;
 }
-export interface ImageProps extends React.ReactElement {
-  style?: CSSProperties & any;
-  size?: number;
-  width?: number;
-  height?: number;
-  source: string;
-}
 
-export class ImageBackground extends PureComponent<
-  ComponentImageBackgroundProps
-> {
+export class ImageBackground extends PureComponent<ComponentImageBackgroundProps> {
   render() {
     const { src, style, ...props } = this.props;
 
