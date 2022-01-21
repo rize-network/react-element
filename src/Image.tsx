@@ -18,7 +18,7 @@ export interface ImageProps
   action?: string;
   alt?: string;
   src: string | any;
-  style?: GenericStyleProp<ImageStyle>;
+  style?: any;
 }
 
 export interface ImageBackgroundProps extends ImageProps {
