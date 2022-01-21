@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import { CSSProperties } from 'styled-components';
 import { applyStyle, ImageElement } from './Element';
 import { View } from './View';
-
-import type { ComponentViewProps } from './View';
 import type { GenericStyleProp, ImageStyle, ImageProps } from './types/types';
 
 export interface ComponentImageProps
@@ -11,32 +9,32 @@ export interface ComponentImageProps
     CSSProperties {
   size?: number;
   className?: string;
-
   backgroundColor?: string;
-  onPress?: void;
+  onPress?: () => void;
   action?: string;
   alt?: string;
   src: string | any;
   style?: GenericStyleProp<ImageStyle>;
 }
 
-export interface ComponentImageBackgroundProps extends ComponentViewProps {
+export interface ComponentImageBackgroundProps extends ComponentImageProps {
   src: string;
 }
 
 export class ImageBackground extends PureComponent<ComponentImageBackgroundProps> {
   render() {
-    const { src, style, ...props } = this.props;
+    const { src, style, onClick, onPress, ...props } = this.props;
 
     return (
       <View
         style={{
-          ...style,
           backgroundSize: 'contain',
           backgroundImage: `url("${src}")`,
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
+          ...style,
         }}
+        onClick={onClick ? onClick : onPress}
         {...props}
       />
     );
@@ -45,23 +43,20 @@ export class ImageBackground extends PureComponent<ComponentImageBackgroundProps
 
 export const Image = (props: ComponentImageProps) => {
   const newStyle = applyStyle(props);
-  let onClick;
-  if (props.onPress !== undefined) {
-    onClick = props.onPress;
-  }
 
-  return <ImageElement {...props} onClick={onClick} {...newStyle} />;
+  return (
+    <ImageElement
+      {...props}
+      onClick={props.onClick ? props.onClick : props.onPress}
+      {...newStyle}
+    />
+  );
 };
 
-export const RoundedImage = ({ size, source, ...props }: any) => (
-  <ImageBackground
-    borderRadius={size / 2}
-    size={size}
-    source={source}
-    {...props}
-  />
+export const RoundedImage = ({ size, src, ...props }: any) => (
+  <ImageBackground borderRadius={size / 2} size={size} src={src} {...props} />
 );
 
-export const SquaredImage = ({ size, source, ...props }: any) => (
-  <ImageBackground {...props} size={size} source={source} />
+export const SquaredImage = ({ size, src, ...props }: any) => (
+  <ImageBackground {...props} size={size} src={src} />
 );
