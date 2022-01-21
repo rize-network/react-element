@@ -124,7 +124,7 @@ const defaultScreenConfig: ScreenConfig = {
 export const ResponsiveContext =
   createContext<ScreenConfig>(defaultScreenConfig);
 
-export const useResponsiveContext = () => useContext(ResponsiveContext);
+export const useResponsive = () => useContext(ResponsiveContext);
 
 const ResponsiveProvider = ({
   config,

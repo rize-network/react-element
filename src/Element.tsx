@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import styled from 'styled-components';
-import { useResponsiveContext } from './provider/ResponsiveProvider';
-import { useThemeContext } from './provider/ThemeProvider';
+import { useResponsive } from './Responsive';
+import { useTheme } from './Theme';
 
 export const TransformStyleProps = [
   'transform',
@@ -290,7 +290,7 @@ allStyleProps.map((property) => {
 });
 
 export const setSize = (newSize: string | number, newProps: any) => {
-  const { convert, responsive } = useResponsiveContext();
+  const { convert, responsive } = useResponsive();
   if (
     typeof newSize === 'string' &&
     newSize.length > 0 &&
@@ -313,8 +313,8 @@ export const setSize = (newSize: string | number, newProps: any) => {
 };
 
 export const applyStyle = (props: any) => {
-  const { getColor } = useThemeContext();
-  const { convert, responsive } = useResponsiveContext();
+  const { getColor } = useTheme();
+  const { convert, responsive } = useResponsive();
 
   const newProps: any = {};
 
@@ -437,7 +437,7 @@ function convertToCSS(props: any) {
 }
 
 export const getResponsiveProps = (props: any) => {
-  const { keys, config } = useResponsiveContext();
+  const { keys, config } = useResponsive();
   const mediaQueries = keys
     .map((size) => {
       return props[size] !== undefined

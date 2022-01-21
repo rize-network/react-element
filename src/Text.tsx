@@ -2,8 +2,8 @@ import React from 'react';
 import type { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
 import { applyStyle, onlyStyle } from './Element';
-import { useThemeContext } from './provider/ThemeProvider';
-import { useResponsiveContext } from './provider/ResponsiveProvider';
+import { useTheme } from './Theme';
+import { useResponsive } from './Responsive';
 import type { GenericStyleProp, TextProps, TextStyle } from './types/types';
 
 export interface ComponentTextProps
@@ -38,7 +38,7 @@ export const formatTextStyle: any = ({
   opacity: number;
   fontSize?: number;
 }) => {
-  const { convert } = useResponsiveContext();
+  const { convert } = useResponsive();
 
   if (props) {
     if (fontSize) {
@@ -68,7 +68,7 @@ export const TextSpan: React.FC<CSSProperties> = styled.div(
 );
 
 export const TextComponent: React.FC<ComponentTextProps> = (textProps) => {
-  const { getColor } = useThemeContext();
+  const { getColor } = useTheme();
 
   const styledProps = applyStyle(textProps);
   const {

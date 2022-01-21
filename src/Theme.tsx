@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createContext, useContext } from 'react';
-import { colors } from '../theme/colors';
+import { colors } from './theme/colors';
 
 type ColorConfig = Record<string, string>;
 
@@ -35,7 +35,7 @@ export const ThemeContext = createContext<{
   colors,
 });
 
-export const useThemeContext = () => useContext(ThemeContext);
+export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider = ({
   colorsConfig = {},
