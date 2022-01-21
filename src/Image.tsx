@@ -2,11 +2,7 @@ import React, { PureComponent } from 'react';
 import { CSSProperties } from 'styled-components';
 import { applyStyle, ImageElement } from './Element';
 import { View } from './View';
-import type {
-  GenericStyleProp,
-  ImageStyle,
-  ImageProps as ComponentImageProps,
-} from './types/types';
+import type { ImageProps as ComponentImageProps } from './types/types';
 
 export interface ImageProps
   extends Omit<ComponentImageProps, 'pointerEvents' | 'source'>,
