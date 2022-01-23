@@ -126,7 +126,7 @@ export const ResponsiveContext =
 
 export const useResponsive = () => useContext(ResponsiveContext);
 
-const ResponsiveProvider = ({
+export const ResponsiveProvider = ({
   config,
   scalingRatio,
   children,

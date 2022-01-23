@@ -37,7 +37,7 @@ export const ThemeContext = createContext<{
 
 export const useTheme = () => useContext(ThemeContext);
 
-const ThemeProvider = ({
+export const ThemeProvider = ({
   colorsConfig = {},
   mainColorsConfig = {},
   children,
@@ -84,5 +84,3 @@ const ThemeProvider = ({
     </ThemeContext.Provider>
   );
 };
-
-export default ThemeProvider;
