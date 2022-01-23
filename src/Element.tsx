@@ -1,5 +1,4 @@
-import type { CSSProperties } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { useResponsive } from './Responsive';
 import { useTheme } from './Theme';
 
@@ -437,20 +436,20 @@ function convertToCSS(props: any) {
 }
 
 export const getResponsiveProps = (props: any) => {
-  const { keys, config } = useResponsive();
-  const mediaQueries = keys
+  const { breakpointKeys, breakpoints } = useResponsive();
+  const mediaQueries = breakpointKeys
     .map((size) => {
       return props[size] !== undefined
         ? `
     @media screen ${
-      config[size].min && config[size].min >= 0
-        ? 'and (min-width:' + config[size].min + 'px)'
+      breakpoints[size].min && breakpoints[size].min >= 0
+        ? 'and (min-width:' + breakpoints[size].min + 'px)'
         : ''
     } ${
-            config[size].max &&
-            config[size].max >= 0 &&
-            config[size].max < Infinity
-              ? 'and (max-width:' + config[size].max + 'px)'
+            breakpoints[size].max &&
+            breakpoints[size].max >= 0 &&
+            breakpoints[size].max < Infinity
+              ? 'and (max-width:' + breakpoints[size].max + 'px)'
               : ''
           } {
      ${convertToCSS(props[size])}

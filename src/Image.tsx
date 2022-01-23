@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { CSSProperties } from 'styled-components';
 import { applyStyle, ImageElement } from './Element';
 import { View } from './View';
-import type { ImageProps as ComponentImageProps } from './types/types';
+import { ImageProps as ComponentImageProps } from './types/types';
 
 export interface ImageProps
   extends Omit<ComponentImageProps, 'pointerEvents' | 'source'>,
@@ -21,7 +21,7 @@ export interface ImageBackgroundProps extends ImageProps {
   src: string;
 }
 
-export class ImageBackground extends PureComponent<ImageBackgroundProps> {
+export class ImageBackground extends React.PureComponent<ImageBackgroundProps> {
   render() {
     const { src, style, onClick, onPress, ...props } = this.props;
 

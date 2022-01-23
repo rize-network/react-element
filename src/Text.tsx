@@ -1,10 +1,10 @@
 import React from 'react';
-import type { CSSProperties } from 'styled-components';
+import { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
 import { applyStyle, onlyStyle } from './Element';
 import { useTheme } from './Theme';
 import { useResponsive } from './Responsive';
-import type { GenericStyleProp, TextProps, TextStyle } from './types/types';
+import { GenericStyleProp, TextProps, TextStyle } from './types/types';
 
 export interface ComponentTextProps
   extends Omit<TextProps, 'pointerEvents' | 'onPress'>,

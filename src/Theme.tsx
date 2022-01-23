@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { createContext, useContext } from 'react';
 import { colors } from './theme/colors';
@@ -8,18 +8,8 @@ type ColorConfig = Record<string, string>;
 type VariantColorConfig = Record<string, Record<string, string>>;
 
 const defaultMainColors: ColorConfig = {
-  primary: '#EC660D',
-  dark: '#312a35',
-  orange: '#EC660D',
-  blue: '#3b82f6',
-  red: '#ef4444',
-  brown: '#AE775F',
-  gray: '#9E9E9E',
-  green: '#22c55e',
   white: '#FFFFFF',
   black: '#000000',
-  darkText: '#000000',
-  lightText: '#FFFFFF',
 };
 
 export const ThemeContext = createContext<{
@@ -44,8 +34,8 @@ export const ThemeProvider = ({
 }: {
   mainColorsConfig?: ColorConfig;
   colorsConfig?: VariantColorConfig;
-  children: any;
-}) => {
+  children?: ReactNode;
+}): React.ReactElement => {
   const getColor = (name: string) => {
     if (name === 'transparent') return name;
     try {
@@ -76,8 +66,8 @@ export const ThemeProvider = ({
     <ThemeContext.Provider
       value={{
         getColor,
-        main: mainColorsConfig,
-        colors: colorsConfig,
+        main: { ...defaultMainColors, ...mainColorsConfig },
+        colors: { ...colors, ...colorsConfig },
       }}
     >
       {children}

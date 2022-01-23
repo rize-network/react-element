@@ -1,7 +1,7 @@
 import React from 'react';
 import { ViewElement, applyStyle } from './Element';
-import type { GenericStyleProp, ViewProps, ViewStyle } from './types/types';
-import type { CSSProperties } from 'react';
+import { GenericStyleProp, ViewProps, ViewStyle } from './types/types';
+import { CSSProperties } from 'styled-components';
 
 export interface ComponentViewProps
   extends Omit<ViewProps, 'pointerEvents' | 'onPress'>,

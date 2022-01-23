@@ -1,7 +1,5 @@
-import React from 'react';
-import { createContext, useContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useState } from 'react';
 import { useMount } from '@app-studio/react-hook';
-import { enquireScreen } from 'enquire-js';
 
 export type RatioScreenConfig = {
   width: number;
@@ -86,62 +84,127 @@ const responsive = {
   fontSize: (value: number) => `${(value * window.outerWidth) / 100}px`,
 };
 
-const defaultScreenKeysConfig = Object.keys(
-  defaultResponsiveConfig
-) as ScreenResponsiveConfig[];
-
 export type ScreenConfig = {
-  screen: ScreenResponsiveConfig;
-  keys: ScreenResponsiveConfig[];
-  config: ResponsiveConfig;
+  breakpoints: ResponsiveConfig;
   scalingRatio: RatioConfig;
-  orientation: 'landscape' | 'portrait';
+};
+
+export type ScreenOrientation = 'landscape' | 'portrait';
+export type UseResponsiveValue = {
+  screen: ScreenResponsiveConfig;
+  breakpointKeys: ScreenResponsiveConfig[];
+  breakpoints: ResponsiveConfig;
+  scalingRatio: RatioConfig;
+  orientation: ScreenOrientation;
   responsive: ScreenResponsiveFunction;
   convert: ScreenConvertFunction;
 };
 
 const defaultScreenConfig: ScreenConfig = {
-  screen: 'xs',
-  keys: defaultScreenKeysConfig,
-  config: defaultResponsiveConfig,
+  breakpoints: defaultResponsiveConfig,
   scalingRatio: defaultScalingRatioConfig,
-  orientation: 'portrait',
-  responsive,
-  convert: {
-    width: (value: number) => {
-      // console.log('width', value, Math.floor(value * ratio.width()) + 'px');
-      return Math.floor(value * defaultScalingRatioConfig['xs'].width);
-    },
-    height: (value: number) => {
-      //  console.log('height', value, Math.floor(value * ratio.height()) );
-      return Math.floor(value * defaultScalingRatioConfig['xs'].height);
-    },
-    fontSize: (value: number) =>
-      Math.floor(value * defaultScalingRatioConfig['xs'].fontSize),
-  },
 };
 
 export const ResponsiveContext =
   createContext<ScreenConfig>(defaultScreenConfig);
 
-export const useResponsive = () => useContext(ResponsiveContext);
+export const useResponsiveContext = () => useContext(ResponsiveContext);
+
+export const useResponsive = (): UseResponsiveValue => {
+  const { breakpoints, scalingRatio } = useResponsiveContext();
+  const [screen, setScreen] = useState('xs' as ScreenResponsiveConfig);
+  const [orientation, setOrientation] = useState(
+    'landscape' as ScreenOrientation
+  );
+
+  const keys = Object.keys(breakpoints) as ScreenResponsiveConfig[];
+
+  const convert = {
+    width: (value: number) => {
+      // console.log('width', value, Math.floor(value * ratio.width()) + 'px');
+      return Math.floor(value * scalingRatio[screen].width);
+    },
+    height: (value: number) => {
+      //  console.log('height', value, Math.floor(value * ratio.height()) );
+      return Math.floor(value * scalingRatio[screen].height);
+    },
+    fontSize: (value: number) =>
+      Math.floor(value * scalingRatio[screen].fontSize),
+  };
+
+  useMount(() => {
+    for (const key of Object.keys(breakpoints)) {
+      const sizeScreen: ScreenSizeRange = breakpoints[
+        key as ScreenResponsiveConfig
+      ] as ScreenSizeRange;
+
+      createQuery(
+        key,
+        `only screen ${
+          sizeScreen.min && sizeScreen.min >= 0
+            ? 'and (min-width:' + sizeScreen.min + 'px)'
+            : ''
+        } ${
+          sizeScreen.max && sizeScreen.max >= 0 && sizeScreen.max < Infinity
+            ? 'and (max-width:' + sizeScreen.max + 'px)'
+            : ''
+        }`,
+        setScreen
+      );
+    }
+
+    createQuery(
+      'landscape',
+      'only screen and (orientation: landscape)',
+      setOrientation
+    );
+    createQuery(
+      'portrait',
+      'only screen and (orientation: portrait)',
+      setOrientation
+    );
+  });
+
+  return {
+    breakpointKeys: keys,
+    orientation,
+    screen,
+    breakpoints,
+    convert,
+    responsive,
+    scalingRatio,
+  };
+};
+
+export const createQuery = (keyScreen: string, query: string, set: any) => {
+  const mql = window.matchMedia(query);
+  const onChange = () => {
+    if (!!mql.matches) {
+      set(keyScreen);
+    }
+  };
+
+  mql.addListener(onChange);
+  if (!!mql.matches) {
+    set(keyScreen);
+  }
+
+  return () => {
+    mql.removeListener(onChange);
+  };
+};
 
 export const ResponsiveProvider = ({
-  config,
+  breakpoints,
   scalingRatio,
   children,
 }: {
-  config?: ResponsiveConfig;
+  breakpoints?: ResponsiveConfig;
   scalingRatio?: RatioConfig;
-  children: any;
-}) => {
-  const [screen, setScreen] = useState(defaultScreenConfig.screen);
-  const [orientation, setOrientation] = useState(
-    defaultScreenConfig.orientation
-  );
-
-  const responsiveConfig: ResponsiveConfig = config
-    ? config
+  children?: ReactNode;
+}): React.ReactElement => {
+  const responsiveConfig: ResponsiveConfig = breakpoints
+    ? breakpoints
     : defaultResponsiveConfig;
 
   const ratioConfig: RatioConfig = {
@@ -149,48 +212,10 @@ export const ResponsiveProvider = ({
     ...scalingRatio,
   };
 
-  const keys = Object.keys(responsiveConfig) as ScreenResponsiveConfig[];
-
-  const convert = {
-    width: (value: number) => {
-      // console.log('width', value, Math.floor(value * ratio.width()) + 'px');
-      return Math.floor(value * ratioConfig[screen].width);
-    },
-    height: (value: number) => {
-      //  console.log('height', value, Math.floor(value * ratio.height()) );
-      return Math.floor(value * ratioConfig[screen].height);
-    },
-    fontSize: (value: number) =>
-      Math.floor(value * ratioConfig[screen].fontSize),
-  };
-
-  useMount(() => {
-    for (const key of Object.keys(responsiveConfig)) {
-      const sizeScreen: ScreenSizeRange = responsiveConfig[
-        key as ScreenResponsiveConfig
-      ] as ScreenSizeRange;
-      enquireScreen(() => {
-        setScreen(key as ScreenResponsiveConfig);
-      }, `only screen ${sizeScreen.min && sizeScreen.min >= 0 ? 'and (min-width:' + sizeScreen.min + 'px)' : ''} ${sizeScreen.max && sizeScreen.max >= 0 && sizeScreen.max < Infinity ? 'and (max-width:' + sizeScreen.max + 'px)' : ''}`);
-    }
-
-    enquireScreen(() => {
-      setOrientation('landscape');
-    }, 'only screen and (orientation: landscape)');
-    enquireScreen(() => {
-      setOrientation('portrait');
-    }, 'only screen and (orientation: portrait)');
-  });
-
   return (
     <ResponsiveContext.Provider
       value={{
-        screen,
-        keys,
-        config: responsiveConfig,
-        orientation,
-        responsive,
-        convert,
+        breakpoints: responsiveConfig,
         scalingRatio: ratioConfig,
       }}
     >
@@ -198,5 +223,3 @@ export const ResponsiveProvider = ({
     </ResponsiveContext.Provider>
   );
 };
-
-export default ResponsiveProvider;

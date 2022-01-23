@@ -39,7 +39,8 @@
     "upgrade": "ncu -u"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">= 16",
+    "styled-components": ">= 5"
   },
   "husky": {
     "hooks": {
@@ -51,9 +52,7 @@
   "module": "dist/react-element.esm.js",
   "dependencies": {
     "@app-studio/react-hook": "^0.0.5",
-    "contrast": "^1.0.1",
-    "enquire-js": "^0.2.1",
-    "styled-components": "^5.3.3"
+    "contrast": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.10",
@@ -86,9 +85,8 @@
     "lint-staged": "^12.2.1",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-is": "^17.0.2",
     "size-limit": "^7.0.5",
+    "styled-components": "^5.3.3",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4"
