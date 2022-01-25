@@ -79,9 +79,9 @@ const defaultResponsiveConfig: ResponsiveConfig = {
 };
 
 const responsive = {
-  width: (value: number) => `${(value * window.outerWidth) / 100}px`,
-  height: (value: number) => `${(value * window.outerHeight) / 100}px`,
-  fontSize: (value: number) => `${(value * window.outerWidth) / 100}px`,
+  width: (value: number) => `${(value * window.innerWidth) / 100}px`,
+  height: (value: number) => `${(value * window.innerHeight) / 100}px`,
+  fontSize: (value: number) => `${(value * window.innerWidth) / 100}px`,
 };
 
 export type ScreenConfig = {
