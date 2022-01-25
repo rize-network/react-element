@@ -371,6 +371,7 @@ export const applyStyle = (props: any) => {
 
       if (property.toLowerCase().indexOf('color') !== -1) {
         value = getColor(value);
+        console.log(property, value);
       }
 
       if (

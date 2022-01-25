@@ -37,6 +37,7 @@ export const ThemeProvider = ({
   children?: ReactNode;
 }): React.ReactElement => {
   const getColor = (name: string) => {
+    console.log('getColor', name);
     if (name === 'transparent') return name;
     try {
       if (name.indexOf('.') !== -1) {

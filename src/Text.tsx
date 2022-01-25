@@ -4,7 +4,12 @@ import styled from 'styled-components';
 import { applyStyle, onlyStyle } from './Element';
 import { useTheme } from './Theme';
 import { useResponsive } from './Responsive';
-import { GenericStyleProp, TextProps, TextStyle } from './types/types';
+import {
+  GenericStyleProp,
+  TextProps,
+  TextStyle,
+  ResponsiveStyle,
+} from './types/types';
 
 export interface ComponentTextProps
   extends Omit<TextProps, 'pointerEvents' | 'onPress'>,
@@ -19,7 +24,7 @@ export interface ComponentTextProps
   locale?: string;
   toUpperCase?: boolean;
   style?: GenericStyleProp<TextStyle>;
-
+  responsive?: ResponsiveStyle;
   backgroundColor?: string;
 
   onPress?: void;

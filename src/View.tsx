@@ -1,10 +1,15 @@
 import React from 'react';
 import { ViewElement, applyStyle } from './Element';
-import { GenericStyleProp, ViewProps, ViewStyle } from './types/types';
+import {
+  GenericStyleProp,
+  ViewProps,
+  ViewStyle,
+  ResponsiveStyle,
+} from './types/types';
 import { CSSProperties } from 'styled-components';
 
 export interface ComponentViewProps
-  extends Omit<ViewProps, 'pointerEvents' | 'onPress'>,
+  extends Omit<ViewProps, 'pointerEvents'>,
     CSSProperties {
   size?: number;
   className?: string;
@@ -14,7 +19,7 @@ export interface ComponentViewProps
   marginHorizontal?: number | string;
   paddingVertical?: number | string;
   marginVertical?: number | string;
-
+  responsive?: ResponsiveStyle;
   onPress?: () => void;
   action?: string;
   backgroundColor?: string;

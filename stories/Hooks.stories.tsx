@@ -1,44 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import {
-  ResponsiveProvider,
-  ThemeProvider,
-  useTheme,
-  useResponsive,
-} from '../src';
-
-const meta: Meta = {
-  title: 'Hooks',
-  subcomponents: [
-    {
-      title: 'Theme',
-      component: ThemeProvider,
-      argTypes: {
-        children: {
-          control: {
-            type: 'Test',
-          },
-        },
-      },
-    },
-    {
-      title: 'Responsive',
-      component: ResponsiveProvider,
-      argTypes: {
-        children: {
-          control: {
-            type: 'Test',
-          },
-        },
-      },
-    },
-  ],
-  parameters: {
-    controls: { expanded: true },
-  },
-};
-
-export default meta;
+import { useTheme, useResponsive } from '../src';
 
 const Theme = () => {
   const theme = useTheme();
@@ -54,17 +16,25 @@ const Responsive = () => {
   return <>{responsive.screen}</>;
 };
 
-const ThemeTemplate: Story = () => (
-  <ThemeProvider>
-    <Theme />
-  </ThemeProvider>
-);
+const meta: Meta = {
+  title: 'Hooks',
+  subcomponents: [
+    {
+      title: 'Theme',
+      component: Theme,
+    },
+    {
+      title: 'Responsive',
+      component: Responsive,
+    },
+  ],
+};
 
-const ResponsiveTemplate: Story = () => (
-  <ResponsiveProvider>
-    <Responsive />
-  </ResponsiveProvider>
-);
+export default meta;
+
+const ThemeTemplate: Story = () => <Theme />;
+
+const ResponsiveTemplate: Story = () => <Responsive />;
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const ThemeHook = ThemeTemplate.bind({});

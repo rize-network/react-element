@@ -691,3 +691,5 @@ export type TextProps = ViewProps & {
     | undefined;
   testID?: string | null | undefined;
 };
+
+export type ResponsiveStyle = Record<string, CSSProperties>;
