@@ -1,6 +1,7 @@
 import React from 'react';
 import { CSSProperties } from 'styled-components';
-import { applyStyle } from './Element';
+import styled from 'styled-components';
+import { applyStyle, onlyStyle } from './Element';
 import { useTheme } from './Theme';
 import { useResponsive } from './Responsive';
 import {
@@ -9,7 +10,6 @@ import {
   TextStyle,
   ResponsiveStyle,
 } from './types/types';
-import { View } from './View';
 
 export interface ComponentTextProps
   extends Omit<TextProps, 'pointerEvents' | 'onPress'>,
@@ -64,11 +64,13 @@ export const formatTextStyle: any = ({
   return props;
 };
 
-export const TextSpan: React.FC<CSSProperties> = (props: any) => {
-  props.display = 'inherit';
-  props.flexDirection = 'column';
-  return <View {...props} />;
-};
+export const TextSpan: React.FC<CSSProperties> = styled.div(
+  (props: CSSProperties) => {
+    props.display = 'inherit';
+    props.flexDirection = 'column';
+    return onlyStyle(props);
+  }
+);
 
 export const TextComponent: React.FC<ComponentTextProps> = (textProps) => {
   const { getColor } = useTheme();
