@@ -1,4 +1,5 @@
-import styled, { CSSProperties } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import { useResponsive } from './Responsive';
 import { useTheme } from './Theme';
 
@@ -371,7 +372,7 @@ export const applyStyle = (props: any) => {
 
       if (property.toLowerCase().indexOf('color') !== -1) {
         value = getColor(value);
-        console.log(property, value);
+        // console.log(property, value);
       }
 
       if (
@@ -426,41 +427,52 @@ export const applyStyle = (props: any) => {
   return newProps;
 };
 
-function convertToCSS(props: any) {
-  return Object.entries(props).reduce((str, [key, val]) => {
-    const casedKey = key.replace(
-      /[A-Z]/g,
-      (match) => `-${match.toLowerCase()}`
-    );
-    return `${str}${casedKey}:${val};`;
-  }, '');
-}
+// function convertToCSS(props: any) {
+//   return Object.entries(props).reduce((str, [key, val]) => {
+//     const casedKey = key.replace(
+//       /[A-Z]/g,
+//       (match) => `-${match.toLowerCase()}`
+//     );
+//     return `${str}${casedKey}:${typeof val === 'number' ? val + 'px' : val};\n`;
+//   }, '');
+// }
 
-export const getResponsiveProps = (props: any) => {
-  const { breakpointKeys, breakpoints } = useResponsive();
-  const mediaQueries = breakpointKeys
-    .map((size) => {
-      return props.responsive && props.responsive[size] !== undefined
-        ? `
-    @media screen ${
-      breakpoints[size].min && breakpoints[size].min >= 0
-        ? 'and (min-width:' + breakpoints[size].min + 'px)'
-        : ''
-    } ${
-            breakpoints[size].max &&
-            breakpoints[size].max >= 0 &&
-            breakpoints[size].max < Infinity
-              ? 'and (max-width:' + breakpoints[size].max + 'px)'
-              : ''
-          } {
-     ${convertToCSS(props.responsive[size])}
-    }`
-        : '';
-    })
-    .join('\n');
+// export const getResponsiveMediaQueries = (props: any) => {
+//   const { breakpointKeys, breakpoints } = useResponsive();
+//   console.log('mediaQueries', props);
 
-  return mediaQueries;
-};
+//   const mediaQueries = breakpointKeys
+//     .map((size) => {
+//       return props && props[size] !== undefined
+//         ? `
+//     @media ${
+//       breakpoints[size].min
+//         ? ' (min-width:' +
+//           (breakpoints[size].min > 0 ? breakpoints[size].min : 0) +
+//           'px)'
+//         : ''
+//     } ${
+//             breakpoints[size].min &&
+//             breakpoints[size].max &&
+//             breakpoints[size].max >= 0 &&
+//             breakpoints[size].max < Infinity
+//               ? ' and '
+//               : ''
+//           } ${
+//             breakpoints[size].max &&
+//             breakpoints[size].max >= 0 &&
+//             breakpoints[size].max < Infinity
+//               ? ' (max-width:' + breakpoints[size].max + 'px)'
+//               : ''
+//           } {
+//      ${convertToCSS(props[size])}
+//     }`
+//         : '';
+//     })
+//     .join('\n');
+
+//   return mediaQueries;
+// };
 
 export const onlyStyle = (props: any) => {
   const filteredProps: any = {};
@@ -474,17 +486,39 @@ export const onlyStyle = (props: any) => {
       filteredProps[property] = props[property];
     }
   });
-  const newProps = applyStyle(filteredProps);
-  if (props.responsive === 'responsive') {
-    newProps.theme = getResponsiveProps(applyStyle(props.responsive));
-  }
-  return newProps;
+  return applyStyle(filteredProps);
+
+  // const responsive = props.responsive
+  //   ? getResponsiveMediaQueries(applyStyle(props.responsive))
+  //   : '';
 };
 
-export const ViewElement = styled.div((props: any) => {
+export const StyledView = styled.div((props: any) => {
   return onlyStyle(props);
 });
 
-export const ImageElement = styled.img((props: CSSProperties) => {
+export const StyledImage = styled.img((props: any) => {
   return onlyStyle(props);
 });
+
+export class ViewElement extends React.PureComponent<any> {
+  render() {
+    let { onClick } = this.props;
+    if (this.props.onPress !== undefined) {
+      onClick = this.props.onPress;
+    }
+
+    //console.log(this.props);
+    return <StyledView {...this.props} onClick={onClick} />;
+  }
+}
+
+export class ImageElement extends React.PureComponent<any> {
+  render() {
+    let { onClick } = this.props;
+    if (this.props.onPress !== undefined) {
+      onClick = this.props.onPress;
+    }
+    return <StyledImage {...this.props} onClick={onClick} />;
+  }
+}

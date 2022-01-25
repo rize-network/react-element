@@ -7,6 +7,7 @@
  *
  * @flow
  */
+import { CSSProperties } from 'styled-components';
 
 export type ColorValue = null | string;
 

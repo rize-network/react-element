@@ -1,6 +1,6 @@
 import React from 'react';
 import { CSSProperties } from 'styled-components';
-import { applyStyle, ImageElement } from './Element';
+import { ImageElement } from './Element';
 import { View } from './View';
 import {
   ImageProps as ComponentImageProps,
@@ -45,17 +45,11 @@ export class ImageBackground extends React.PureComponent<ImageBackgroundProps> {
   }
 }
 
-export const Image = (props: ImageProps) => {
-  const newStyle = applyStyle(props);
-
-  return (
-    <ImageElement
-      {...props}
-      onClick={props.onClick ? props.onClick : props.onPress}
-      {...newStyle}
-    />
-  );
-};
+export class Image extends React.PureComponent<ImageProps> {
+  render() {
+    return <ImageElement {...this.props} />;
+  }
+}
 
 export const RoundedImage = ({ size, src, ...props }: any) => (
   <ImageBackground borderRadius={size / 2} size={size} src={src} {...props} />

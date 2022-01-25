@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewElement, applyStyle } from './Element';
+import { ViewElement } from './Element';
 import {
   GenericStyleProp,
   ViewProps,
@@ -25,14 +25,11 @@ export interface ComponentViewProps
   backgroundColor?: string;
 }
 
-export const View = (props: ComponentViewProps) => {
-  const newStyle = applyStyle(props);
-  let onClick;
-  if (props.onPress !== undefined) {
-    onClick = props.onPress;
+export class View extends React.PureComponent<ComponentViewProps> {
+  render() {
+    return <ViewElement {...this.props} />;
   }
+}
 
-  return <ViewElement {...props} onClick={onClick} {...newStyle} />;
-};
 export const SafeAreaView = View;
 export const ScrollView = View;

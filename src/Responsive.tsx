@@ -151,6 +151,13 @@ export const useResponsive = (): UseResponsiveValue => {
         }`,
         setScreen
       );
+
+      // if (
+      //   window.innerWidth >= sizeScreen.min &&
+      //   window.innerWidth <= sizeScreen.max
+      // ) {
+      //   setScreen(key as ScreenResponsiveConfig);
+      // }
     }
 
     createQuery(
