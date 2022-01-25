@@ -440,7 +440,7 @@ export const getResponsiveProps = (props: any) => {
   const { breakpointKeys, breakpoints } = useResponsive();
   const mediaQueries = breakpointKeys
     .map((size) => {
-      return props[size] !== undefined
+      return props.responsive && props.responsive[size] !== undefined
         ? `
     @media screen ${
       breakpoints[size].min && breakpoints[size].min >= 0
@@ -453,7 +453,7 @@ export const getResponsiveProps = (props: any) => {
               ? 'and (max-width:' + breakpoints[size].max + 'px)'
               : ''
           } {
-     ${convertToCSS(props[size])}
+     ${convertToCSS(props.responsive[size])}
     }`
         : '';
     })
