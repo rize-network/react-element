@@ -50,10 +50,6 @@
   "name": "@app-studio/react-element",
   "author": "Steedmonteiro <steed@rize.network>",
   "module": "dist/react-element.esm.js",
-  "dependencies": {
-    "@app-studio/react-hook": "^0.0.5",
-    "contrast": "^1.0.1"
-  },
   "devDependencies": {
     "@babel/core": "^7.16.10",
     "@commitlint/cli": "^16.0.3",

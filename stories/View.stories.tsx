@@ -4,8 +4,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { View } from '../src';
-import { useResponsive } from '@app-studio/react-hook';
+import { View, useResponsive } from '../src';
 
 export default {
   /* 👇 The title prop is optional.

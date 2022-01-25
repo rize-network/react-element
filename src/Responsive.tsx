@@ -1,5 +1,5 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react';
-import { useMount } from '@app-studio/react-hook';
+import { useMount } from './hooks/useMount';
 
 export type RatioScreenConfig = {
   width: number;
