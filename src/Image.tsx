@@ -45,11 +45,7 @@ export class ImageBackground extends React.PureComponent<ImageBackgroundProps> {
   }
 }
 
-export class Image extends React.PureComponent<ImageProps> {
-  render() {
-    return <ImageElement {...this.props} />;
-  }
-}
+export const Image = (props: ImageProps) => <ImageElement {...props} />;
 
 export const RoundedImage = ({ size, src, ...props }: any) => (
   <ImageBackground borderRadius={size / 2} size={size} src={src} {...props} />

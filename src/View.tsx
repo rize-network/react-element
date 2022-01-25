@@ -25,11 +25,7 @@ export interface ComponentViewProps
   backgroundColor?: string;
 }
 
-export class View extends React.PureComponent<ComponentViewProps> {
-  render() {
-    return <ViewElement {...this.props} />;
-  }
-}
+export const View = (props: ComponentViewProps) => <ViewElement {...props} />;
 
 export const SafeAreaView = View;
 export const ScrollView = View;
