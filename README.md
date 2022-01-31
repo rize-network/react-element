@@ -1,25 +1,25 @@
 
 # React Element
 
-[![npm version](https://img.shields.io/npm/v/react-element.svg?style=for-the-badge)](https://www.npmjs.com/package/@app-studio/react-element)
-[![npm](https://img.shields.io/npm/dt/@app-studio/react-element.svg?style=for-the-badge)](https://www.npmjs.com/package/@app-studio/react-element)
+[![npm version](https://img.shields.io/npm/v/app-studio.svg?style=for-the-badge)](https://www.npmjs.com/package/app-studio)
+[![npm](https://img.shields.io/npm/dt/app-studio.svg?style=for-the-badge)](https://www.npmjs.com/package/app-studio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 
 
-[npm-image]: http://img.shields.io/npm/v/app-studio/react-element.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/app-studio/react-element
-[github-action-image]: https://github.com/rize-network/react-element/workflows/%E2%9C%85%20test/badge.svg
-[github-action-url]: https://github.com/rize-network/react-element/actions?query=workflow%3A%22%E2%9C%85+test%22
+[npm-image]: http://img.shields.io/npm/v/app-studio/app-studio.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/app-studio/app-studio
+[github-action-image]: https://github.com/rize-network/app-studio/workflows/%E2%9C%85%20test/badge.svg
+[github-action-url]: https://github.com/rize-network/app-studio/actions?query=workflow%3A%22%E2%9C%85+test%22
 
-[download-image]: https://img.shields.io/npm/dm/app-studio/react-element.svg?style=flat-square
-[download-url]: https://npmjs.org/package/app-studio/react-element
+[download-image]: https://img.shields.io/npm/dm/app-studio/app-studio.svg?style=flat-square
+[download-url]: https://npmjs.org/package/app-studio/app-studio
 
-[help-wanted-image]: https://flat.badgen.net/github/label-issues/rize-network/react-element/help%20wanted/open
-[help-wanted-url]: https://github.com/rize-network/react-element/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22
+[help-wanted-image]: https://flat.badgen.net/github/label-issues/rize-network/app-studio/help%20wanted/open
+[help-wanted-url]: https://github.com/rize-network/app-studio/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22
 
 [discussions-image]: https://img.shields.io/badge/discussions-on%20github-blue?style=flat-square
-[discussions-url]: https://github.com/rize-network/react-element/discussions
+[discussions-url]: https://github.com/rize-network/app-studio/discussions
 
 [issues-helper-image]: https://img.shields.io/badge/using-issues--helper-orange?style=flat-square
 [issues-helper-url]: https://github.com/actions-cool/issues-helper
@@ -41,29 +41,29 @@
 ## 📦 Install
 
 ```bash
-npm install react-element --save
+npm install app-studio --save
 ```
 
 ## 🔨 Usage
 
 ```jsx
-import MyComponent from "react-element";
+import MyComponent from "app-studio";
 
 <MyComponent />
 ```
 
 ### TypeScript
 
-`react-element` is written in TypeScript with complete definitions.
+`app-studio` is written in TypeScript with complete definitions.
 
 
 ## 🔗 Links
 - [Change Log](CHANGELOG.md)
-- [Versioning Release Note](https://github.com/rize-network/react-element/wiki/)
+- [Versioning Release Note](https://github.com/rize-network/app-studio/wiki/)
 - [FAQ](https://ant.design/docs/react/faq)
 - [CodeSandbox Template](https://u.ant.design/codesandbox-repro) for bug reports
 - [Customize Theme](https://ant.design/docs/react/customize-theme)
-- [How to Apply for Being A Collaborator](https://github.com/rize-network/react-element/wiki/Collaborators#how-to-apply-for-being-a-collaborator)
+- [How to Apply for Being A Collaborator](https://github.com/rize-network/app-studio/wiki/Collaborators#how-to-apply-for-being-a-collaborator)
 
 
 
@@ -71,9 +71,9 @@ import MyComponent from "react-element";
 
 Read our [contributing guide](https://ant.design/docs/react/contributing) and let's build a better rize-network together.
 
-We welcome all contributions. Please read our [CONTRIBUTING.md](https://github.com/rize-network/react-element/blob/master/.github/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/rize-network/react-element/pulls) or as [GitHub issues](https://github.com/rize-network/react-element/issues). If you'd like to improve code, check out the [Development Instructions](https://github.com/rize-network/react-element/wiki/Development) and have a good time! :)
+We welcome all contributions. Please read our [CONTRIBUTING.md](https://github.com/rize-network/app-studio/blob/master/.github/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/rize-network/app-studio/pulls) or as [GitHub issues](https://github.com/rize-network/app-studio/issues). If you'd like to improve code, check out the [Development Instructions](https://github.com/rize-network/app-studio/wiki/Development) and have a good time! :)
 
-If you are a collaborator, please follow our [Pull Request principle](https://github.com/rize-network/react-element/wiki/PR-principle) to create a Pull Request with [collaborator template](https://github.com/rize-network/react-element/compare?expand=1&template=collaborator.md).
+If you are a collaborator, please follow our [Pull Request principle](https://github.com/rize-network/app-studio/wiki/PR-principle) to create a Pull Request with [collaborator template](https://github.com/rize-network/app-studio/compare?expand=1&template=collaborator.md).
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/o/rize-network)
 

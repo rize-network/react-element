@@ -1,69 +1,36 @@
 import React, { ReactNode, createContext, useContext } from 'react';
 
-export type ScreenResponsiveConfig = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-export type RatioScreenConfig = {
-  width: number;
-  height: number;
-  fontSize: number;
-};
-
-type RatioConfig = Record<ScreenResponsiveConfig, RatioScreenConfig>;
-
-export type ScreenResponsiveFunction = {
-  width: (value: number) => string;
-  height: (value: number) => string;
-  fontSize: (value: number) => string;
-};
-
-export type ScreenConvertFunction = {
-  width: (value: number) => number;
-  height: (value: number) => number;
-  fontSize: (value: number) => number;
-};
-
 export type ScreenSizeRange = {
+  breakpoint: string;
   min: number;
   max?: number;
 };
-export type ResponsiveConfig = Record<ScreenResponsiveConfig, ScreenSizeRange>;
+export type ResponsiveConfig = Record<string, number>;
 const defaultResponsiveConfig: ResponsiveConfig = {
-  xs: {
-    min: 0,
-    max: 480,
-  },
-  sm: {
-    min: 480,
-    max: 768,
-  },
-  md: {
-    min: 768,
-    max: 992,
-  },
-  lg: {
-    min: 992,
-    max: 1200,
-  },
-  xl: {
-    min: 1200,
-  },
+  xs: 0,
+  sm: 340,
+  md: 560,
+  lg: 1080,
+  xl: 1300,
+};
+
+export type DeviceConfig = Record<string, string[]>;
+const defaultDeviceConfig: DeviceConfig = {
+  mobile: ['xs', 'sm'],
+  tablet: ['md', 'lg'],
+  desktop: ['lg', 'xl'],
 };
 
 export type ScreenConfig = {
   breakpoints: ResponsiveConfig;
+  devices: DeviceConfig;
 };
 
 export type ScreenOrientation = 'landscape' | 'portrait';
-export type UseResponsiveValue = {
-  screen: ScreenResponsiveConfig;
-  breakpointKeys: keyof ResponsiveConfig;
-  breakpoints: ResponsiveConfig;
-  orientation: ScreenOrientation;
-  convert: ScreenConvertFunction;
-};
 
 const defaultScreenConfig: ScreenConfig = {
   breakpoints: defaultResponsiveConfig,
+  devices: defaultDeviceConfig,
 };
 
 export const ResponsiveContext =
@@ -73,19 +40,25 @@ export const useResponsiveContext = () => useContext(ResponsiveContext);
 
 export const ResponsiveProvider = ({
   breakpoints,
+  devices,
   children,
 }: {
   breakpoints?: ResponsiveConfig;
+  devices?: DeviceConfig;
+
   children?: ReactNode;
 }): React.ReactElement => {
   const responsiveConfig: ResponsiveConfig = breakpoints
     ? breakpoints
     : defaultResponsiveConfig;
 
+  const deviceConfig: DeviceConfig = devices ? devices : defaultDeviceConfig;
+
   return (
     <ResponsiveContext.Provider
       value={{
         breakpoints: responsiveConfig,
+        devices: deviceConfig,
       }}
     >
       {children}

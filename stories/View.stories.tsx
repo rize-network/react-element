@@ -4,7 +4,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { View, useResponsive } from '../src';
+import { View, useResponsive } from '../src/index';
 
 export default {
   /* 👇 The title prop is optional.
@@ -16,8 +16,8 @@ export default {
 } as ComponentMeta<typeof View>;
 
 export const Exemple: ComponentStory<typeof View> = () => {
-  const { screen } = useResponsive();
-
+  const { screen, on, devices } = useResponsive();
+  console.log(devices);
   const responsive = {
     xs: {
       backgroundColor: 'red',
@@ -29,15 +29,16 @@ export const Exemple: ComponentStory<typeof View> = () => {
       backgroundColor: 'blue',
     },
     lg: {
-      backgroundColor: 'black',
+      backgroundColor: 'yellow',
     },
     xl: {
       backgroundColor: 'red',
     },
   };
+
   return (
     <View size={100} {...responsive[screen]}>
-      {screen}
+      {screen} - {on('mobile') ? 'Mobile' : 'Not Mobile'}
     </View>
   );
 };

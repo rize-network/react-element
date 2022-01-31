@@ -1,9 +1,8 @@
 import React from 'react';
 import { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
-import { applyStyle, onlyStyle } from './Element';
+import { applyStyle } from './Element';
 import { useTheme } from '../providers/Theme';
-import { useResponsive } from '../providers/Responsive';
 import {
   GenericStyleProp,
   TextProps,
@@ -43,13 +42,7 @@ export const formatTextStyle: any = ({
   opacity: number;
   fontSize?: number;
 }) => {
-  const { convert } = useResponsive();
-
   if (props) {
-    if (fontSize) {
-      fontSize = convert.fontSize(fontSize);
-    }
-
     if (hint) {
       opacity = hint as number;
     }
@@ -68,7 +61,7 @@ export const TextSpan: React.FC<CSSProperties> = styled.div(
   (props: CSSProperties) => {
     props.display = 'inherit';
     props.flexDirection = 'column';
-    return onlyStyle(props);
+    return applyStyle(props);
   }
 );
 
