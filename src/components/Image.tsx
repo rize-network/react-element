@@ -5,7 +5,7 @@ import { View } from './View';
 import {
   ImageProps as ComponentImageProps,
   ResponsiveStyle,
-} from './types/types';
+} from '../types/style';
 
 export interface ImageProps
   extends Omit<ComponentImageProps, 'pointerEvents' | 'source'>,

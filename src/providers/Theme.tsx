@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
 import { createContext, useContext } from 'react';
-import { colors } from './theme/colors';
+import { colors } from '../utils/colors';
 
 type ColorConfig = Record<string, string>;
 

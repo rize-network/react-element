@@ -2,14 +2,14 @@ import React from 'react';
 import { CSSProperties } from 'styled-components';
 import styled from 'styled-components';
 import { applyStyle, onlyStyle } from './Element';
-import { useTheme } from './Theme';
-import { useResponsive } from './Responsive';
+import { useTheme } from '../providers/Theme';
+import { useResponsive } from '../providers/Responsive';
 import {
   GenericStyleProp,
   TextProps,
   TextStyle,
   ResponsiveStyle,
-} from './types/types';
+} from '../types/style';
 
 export interface ComponentTextProps
   extends Omit<TextProps, 'pointerEvents' | 'onPress'>,
